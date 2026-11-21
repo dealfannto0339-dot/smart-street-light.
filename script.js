@@ -22,3 +22,23 @@ document.querySelectorAll("[data-pir]").forEach(b=>b.addEventListener("click",()
 $("themeBtn").addEventListener("click",()=>document.body.classList.toggle("light"));
 function simulate(){state.ldr=Math.max(5,Math.min(95,state.ldr+(Math.random()-.5)*4));state.mode==="auto"?applyAuto():(current(),render());labels.push(new Date().toLocaleTimeString("id-ID",{minute:"2-digit",second:"2-digit"}));powerData.push(+state.current.toFixed(2));if(labels.length>18){labels.shift();powerData.shift()}chart.update("none");$("lastUpdated").textContent="Diperbarui sekarang"}
 render();for(let i=0;i<10;i++){labels.push(`${i}:00`);powerData.push(.42)}chart.update();setInterval(simulate,2500);
+
+if (window.gsap) {
+  gsap.set(".identity,.topbar,.intro,.metric,.panel,footer", {opacity:0, y:16});
+  const intro = gsap.timeline({defaults:{ease:"power3.out"}});
+  intro.to(".identity", {opacity:1,y:0,duration:.55})
+    .to(".topbar", {opacity:1,y:0,duration:.55}, "-=.28")
+    .to(".intro", {opacity:1,y:0,duration:.65}, "-=.30")
+    .to(".metric", {opacity:1,y:0,duration:.48,stagger:.09}, "-=.32")
+    .to(".main-grid .panel", {opacity:1,y:0,duration:.55,stagger:.12}, "-=.25")
+    .to(".sensor-detail,footer", {opacity:1,y:0,duration:.45,stagger:.08}, "-=.22");
+
+  gsap.fromTo(".lamp-glow", {scale:.75,opacity:.25}, {
+    scale:1.08, opacity:.9, duration:2.2, ease:"sine.inOut", yoyo:true, repeat:-1, transformOrigin:"50% 0%"
+  });
+  gsap.to(".status>i", {scale:1.35,opacity:.65,duration:1.1,repeat:-1,yoyo:true,ease:"sine.inOut"});
+  document.querySelectorAll(".metric,.panel").forEach((card) => {
+    card.addEventListener("mouseenter", () => gsap.to(card,{y:-3,duration:.22,ease:"power2.out"}));
+    card.addEventListener("mouseleave", () => gsap.to(card,{y:0,duration:.3,ease:"power2.out"}));
+  });
+}

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 440" role="img" aria-labelledby="title desc">
+<title id="title">ESP32 street light wiring overview</title>
+<desc id="desc">ESP32 connected to LDR, two PIR sensors, lamp driver and current sensor.</desc>
+<defs>
+  <style>
+    .board{fill:#0d4160;stroke:#36b8e8;stroke-width:2}
+    .module{fill:#102c40;stroke:#32617a;stroke-width:1.6}
+    .title{fill:#edf8fc;font:700 17px Arial,sans-serif}
+    .sub{fill:#9bb9c9;font:12px Arial,sans-serif}
+    .pin{fill:#c5e8f5;font:600 12px Arial,sans-serif}
+    .wire{fill:none;stroke:#42bfe9;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+    .ground{fill:none;stroke:#76d6b4;stroke-width:2.5;stroke-dasharray:7 6;stroke-linecap:round}
+    .dot{fill:#42bfe9}
+    .legend{fill:#9bb9c9;font:12px Arial,sans-serif}
+  </style>
+</defs>
+<rect width="1040" height="440" rx="18" fill="#0a1c2a"/>
+<rect x="398" y="55" width="244" height="326" rx="18" class="board"/>
+<text x="520" y="91" text-anchor="middle" class="title">ESP32 DEVKIT V1</text>
+<text x="520" y="113" text-anchor="middle" class="sub">Main controller</text>
+<g class="pin">
+  <text x="420" y="158">GPIO 34</text><text x="420" y="205">GPIO 26</text><text x="420" y="252">GPIO 27</text>
+  <text x="420" y="299">GPIO 25</text><text x="420" y="346">GPIO 35</text>
+</g>
+<g class="wire">
+  <path d="M398 153H325V105H270"/><path d="M398 200H330V210H270"/><path d="M398 247H335V315H270"/>
+  <path d="M642 294H710V150H770"/><path d="M642 341H725V315H770"/>
+</g>
+<g class="ground"><path d="M270 132H350V390H690V350H770"/></g>
+<g>
+  <rect x="40" y="68" width="230" height="76" rx="12" class="module"/>
+  <text x="155" y="99" text-anchor="middle" class="title">LDR SENSOR</text><text x="155" y="121" text-anchor="middle" class="sub">AO → GPIO 34</text>
+  <rect x="40" y="173" width="230" height="76" rx="12" class="module"/>
+  <text x="155" y="204" text-anchor="middle" class="title">PIR SENSOR 1</text><text x="155" y="226" text-anchor="middle" class="sub">OUT → GPIO 26</text>
+  <rect x="40" y="278" width="230" height="76" rx="12" class="module"/>
+  <text x="155" y="309" text-anchor="middle" class="title">PIR SENSOR 2</text><text x="155" y="331" text-anchor="middle" class="sub">OUT → GPIO 27</text>
+  <rect x="770" y="112" width="230" height="76" rx="12" class="module"/>
+  <text x="885" y="143" text-anchor="middle" class="title">LAMP DRIVER</text><text x="885" y="165" text-anchor="middle" class="sub">IN / PWM → GPIO 25</text>
+  <rect x="770" y="278" width="230" height="76" rx="12" class="module"/>
+  <text x="885" y="309" text-anchor="middle" class="title">CURRENT SENSOR</text><text x="885" y="331" text-anchor="middle" class="sub">OUT → GPIO 35</text>
+</g>
+<g class="dot"><circle cx="325" cy="153" r="4"/><circle cx="330" cy="200" r="4"/><circle cx="335" cy="247" r="4"/><circle cx="710" cy="294" r="4"/><circle cx="725" cy="341" r="4"/></g>
+<path d="M42 405h34" class="wire"/><text x="86" y="409" class="legend">Signal</text>
+<path d="M175 405h34" class="ground"/><text x="219" y="409" class="legend">Ground reference</text>
+<text x="998" y="409" text-anchor="end" class="legend">Block diagram · not a power schematic</text>
+</svg>

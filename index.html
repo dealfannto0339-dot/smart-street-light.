@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRS | Smart Street Lighting</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="identity">
+      <img src="assets/drs-logo.png" alt="DRS Durenan Robotic Squad">
+      <div><b>DRS</b><small>DURENAN ROBOTIC SQUAD</small></div>
+    </div>
+    <div class="nav-caption">WORKSPACE</div>
+    <a class="nav active" href="#overview"><span>▦</span> Dashboard</a>
+    <a class="nav" href="#monitor"><span>⌁</span> Monitoring</a>
+    <a class="nav" href="#control"><span>◉</span> Control lamp</a>
+    <div class="sidebar-foot"><i></i> SMART STREET LIGHT</div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div><p class="eyebrow">DURENAN ROBOTIC SQUAD / PROJECT</p><h1>Smart Street Lighting</h1></div>
+      <div class="top-actions"><span class="connection"><i></i><span id="connectionText">SIMULATION</span></span><button id="themeBtn" class="theme-btn" aria-label="Ganti tema">☼</button></div>
+    </header>
+
+    <section class="intro">
+      <div><span class="project-tag">IOT · ESP32</span><h2>Adaptive Street Light</h2><p>Sistem penerangan jalan otomatis berbasis cahaya dan gerakan.</p></div>
+      <div class="status"><i></i><div><small>STATUS SISTEM</small><b id="systemStatus">AKTIF</b></div></div>
+    </section>
+
+    <section class="metrics" id="monitor">
+      <article class="metric"><div class="metric-head"><span>Intensitas cahaya</span><span class="metric-icon">☼</span></div><strong id="ldrValue">38<small>%</small></strong><div class="bar"><i id="ldrMeter"></i></div><p>Sensor LDR</p></article>
+      <article class="metric"><div class="metric-head"><span>Deteksi gerakan</span><span class="metric-icon">⌖</span></div><strong id="pirValue">0<small>/2</small></strong><div class="pills"><span id="pir1Badge">PIR 1 · CLEAR</span><span id="pir2Badge">PIR 2 · CLEAR</span></div><p>Sensor PIR</p></article>
+      <article class="metric"><div class="metric-head"><span>Brightness lampu</span><span class="metric-icon">◉</span></div><strong id="brightnessValue">65<small>%</small></strong><div class="bar"><i id="brightnessMeter"></i></div><p>Output PWM</p></article>
+      <article class="metric"><div class="metric-head"><span>Arus listrik</span><span class="metric-icon">ϟ</span></div><strong id="currentValue">0.42<small>A</small></strong><div class="bar"><i id="currentMeter"></i></div><p>Sensor arus</p></article>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel chart-panel">
+        <div class="panel-title"><div><span class="eyebrow">LIVE DATA</span><h3>Grafik pemakaian</h3></div><span class="legend"><i></i> Arus (A)</span></div>
+        <div class="chart-wrap"><canvas id="powerChart"></canvas></div>
+      </article>
+      <article class="panel control-panel" id="control">
+        <div class="panel-title"><div><span class="eyebrow">CONTROL</span><h3>Kontrol lampu</h3></div><span class="mode" id="modeTag">AUTO</span></div>
+        <div class="mode-switch"><button class="mode-btn selected" data-mode="auto">Otomatis</button><button class="mode-btn" data-mode="manual">Manual</button></div>
+        <div class="lamp-visual"><div class="lamp-glow" id="lampGlow"></div><div class="lamp-arm"></div><div class="lamp-pole"></div><div class="lamp-base"></div></div>
+        <div class="slider-head"><label for="brightnessSlider">Atur brightness</label><b id="sliderValue">65%</b></div>
+        <input type="range" min="0" max="100" value="65" id="brightnessSlider">
+        <div class="range-labels"><span>0%</span><span>100%</span></div>
+        <button class="power-btn" id="powerBtn"><span>⏻</span><b id="powerText">Lampu menyala</b></button>
+        <p class="helper" id="controlHint">Mode otomatis menyesuaikan lampu berdasarkan kondisi sekitar.</p>
+      </article>
+    </section>
+
+    <section class="panel sensor-detail">
+      <div class="panel-title"><div><span class="eyebrow">DEVICE STATUS</span><h3>Detail sensor</h3></div><span class="timestamp" id="lastUpdated">Diperbarui sekarang</span></div>
+      <div class="detail-grid">
+        <div><span>LDR · ADC</span><b id="ldrRaw">1840</b></div>
+        <div><span>PIR 1 · AREA A</span><b id="pir1Text">Tidak ada gerakan</b><button class="simulate" data-pir="1">Simulasikan gerakan</button></div>
+        <div><span>PIR 2 · AREA B</span><b id="pir2Text">Tidak ada gerakan</b><button class="simulate" data-pir="2">Simulasikan gerakan</button></div>
+        <div><span>ARUS TERUKUR</span><b id="currentRaw">0.42 A</b></div>
+      </div>
+    </section>
+    <footer><span>DRS · DURENAN ROBOTIC SQUAD</span><span>SMART STREET LIGHTING SYSTEM</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

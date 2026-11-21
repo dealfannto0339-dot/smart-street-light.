@@ -18,6 +18,8 @@
     <a class="nav active" href="#overview"><span>▦</span> Dashboard</a>
     <a class="nav" href="#monitor"><span>⌁</span> Monitoring</a>
     <a class="nav" href="#control"><span>◉</span> Control lamp</a>
+    <a class="nav" href="#wiring"><span>⌘</span> Wiring & konfigurasi</a>
+    <a class="nav" href="#wiring"><span>⌘</span> Wiring & konfigurasi</a>
     <div class="sidebar-foot"><i></i> SMART STREET LIGHT</div>
   </aside>
 
@@ -47,7 +49,12 @@
       <article class="panel control-panel" id="control">
         <div class="panel-title"><div><span class="eyebrow">CONTROL</span><h3>Kontrol lampu</h3></div><span class="mode" id="modeTag">AUTO</span></div>
         <div class="mode-switch"><button class="mode-btn selected" data-mode="auto">Otomatis</button><button class="mode-btn" data-mode="manual">Manual</button></div>
-        <div class="lamp-visual"><div class="lamp-glow" id="lampGlow"></div><div class="lamp-arm"></div><div class="lamp-pole"></div><div class="lamp-base"></div></div>
+        <div class="lamp-visual">
+          <svg class="bulb-icon" id="lampGlow" viewBox="0 0 64 80" role="img" aria-label="Lampu">
+            <path d="M32 3C16.5 3 5 14.7 5 29.1c0 9.6 4.7 16.5 11.5 22.8 3.4 3.6 5.2 7 5.7 11.1h17.6c.5-4.1 2.3-7.5 5.7-11.1C52.3 45.6 59 38.7 59 29.1 59 14.7 47.5 3 32 3Z" fill="currentColor"/>
+            <path d="M23 66h18M24.5 71h15M27 76h10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div class="slider-head"><label for="brightnessSlider">Atur brightness</label><b id="sliderValue">65%</b></div>
         <input type="range" min="0" max="100" value="65" id="brightnessSlider">
         <div class="range-labels"><span>0%</span><span>100%</span></div>
@@ -60,11 +67,51 @@
       <div class="panel-title"><div><span class="eyebrow">DEVICE STATUS</span><h3>Detail sensor</h3></div><span class="timestamp" id="lastUpdated">Diperbarui sekarang</span></div>
       <div class="detail-grid">
         <div><span>LDR · ADC</span><b id="ldrRaw">1840</b></div>
-        <div><span>PIR 1 · AREA A</span><b id="pir1Text">Tidak ada gerakan</b><button class="simulate" data-pir="1">Simulasikan gerakan</button></div>
-        <div><span>PIR 2 · AREA B</span><b id="pir2Text">Tidak ada gerakan</b><button class="simulate" data-pir="2">Simulasikan gerakan</button></div>
+        <div><span>PIR 1 · AREA A</span><b id="pir1Text">Tidak ada gerakan</b></div>
+        <div><span>PIR 2 · AREA B</span><b id="pir2Text">Tidak ada gerakan</b></div>
         <div><span>ARUS TERUKUR</span><b id="currentRaw">0.42 A</b></div>
       </div>
     </section>
+
+    <section class="wiring-section" id="wiring">
+      <div class="wiring-heading">
+        <div>
+          <span class="eyebrow">HARDWARE REFERENCE</span>
+          <h3>Wiring & konfigurasi</h3>
+          <p>Diagram koneksi dan pemetaan pin perangkat.</p>
+        </div>
+        <a class="cirkit-link" href="https://creator.circzy.com/#/p/WtUjtDokDQ" target="_blank" rel="noopener">
+          Buka project di Circzy <span>↗</span>
+        </a>
+      </div>
+      <article class="panel wiring-panel">
+        <div class="diagram-top"><b>Connection diagram</b><span>ESP32 DEVKIT V1</span></div>
+        <div class="diagram-image-wrap">
+          <img class="wiring-image" src="assets/wiring-diagram.svg" alt="Diagram blok koneksi ESP32 dengan sensor LDR, dua sensor PIR, driver lampu, dan sensor arus">
+        </div>
+        <div class="diagram-caption">Diagram referensi jalur sinyal. Detail catu daya dan driver mengikuti spesifikasi modul yang digunakan.</div>
+      </article>
+      <article class="panel pin-panel">
+        <div class="panel-title">
+          <div><span class="eyebrow">PIN MAPPING</span><h3>Daftar koneksi</h3></div>
+          <span class="timestamp">ESP32 DevKit V1</span>
+        </div>
+        <div class="pin-table-wrap">
+          <table class="pin-table">
+            <thead><tr><th>Komponen</th><th>Pin komponen</th><th>ESP32</th><th>Fungsi</th></tr></thead>
+            <tbody>
+              <tr><td>LDR</td><td>AO</td><td><code>GPIO 34</code></td><td>Pembacaan cahaya</td></tr>
+              <tr><td>PIR 1</td><td>OUT</td><td><code>GPIO 26</code></td><td>Deteksi area A</td></tr>
+              <tr><td>PIR 2</td><td>OUT</td><td><code>GPIO 27</code></td><td>Deteksi area B</td></tr>
+              <tr><td>Driver lampu</td><td>IN / PWM</td><td><code>GPIO 25</code></td><td>Kontrol brightness</td></tr>
+              <tr><td>Sensor arus</td><td>OUT</td><td><code>GPIO 35</code></td><td>Monitoring arus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="wiring-note">GPIO 25 mengendalikan input driver, bukan beban lampu secara langsung. Pastikan level tegangan sensor sesuai dengan ESP32 dan gunakan catu daya serta driver yang sesuai untuk lampu.</p>
+      </article>
+    </section>
+
     <footer><span>DRS · DURENAN ROBOTIC SQUAD</span><span>SMART STREET LIGHTING SYSTEM</span></footer>
   </main>
   <script src="script.js"></script>
